@@ -479,12 +479,6 @@
                                                             <span>Sub Total:</span>
                                                             <span class="number-c">$108.00</span>
                                                         </div>
-                                                        <div class="single-progress-area-incard">
-                                                            <div class="progress">
-                                                                <div class="progress-bar wow fadeInLeft" role="progressbar" style="width: 80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                            </div>
-                                                        </div>
-                                                        <p>Spend More <span>$125.00</span> to reach <span>Free Shipping</span></p>
                                                     </div>
                                                     <div class="button-wrapper d-flex align-items-center justify-content-between">
                                                         <a href="cart.html" class="rts-btn btn-primary ">View Cart</a>
