@@ -14193,7 +14193,7 @@ body.sal-disabled [data-sal|=flip] {
 
 /* elements */
 .about-banner-area-bg {
-  background-image: url(../images/about/01.jpg);
+/*  background-image: url(../images/about/01.jpg);*/
   height: 582px;
   display: flex;
   align-items: center;

@@ -3,6 +3,67 @@ get_header();
 /* Template Name: How We Work */
 ?>
 
+
+<style>
+	body {
+		font-family: Arial, sans-serif;
+	}
+	.video {
+		position: relative;
+		width: 100%;
+		cursor: pointer;
+	}
+	.video img {
+		width: 100%;
+	}
+	.video a {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: block;
+		width: 60px;
+		height: 60px;
+	}
+	/* Modal Styles */
+	.modal {
+		display: none;
+		position: fixed;
+		z-index: 9999;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgba(0, 0, 0, 0.8);
+		justify-content: center;
+		align-items: center;
+	}
+	.modal-content {
+		position: relative;
+		width: 80%;
+		max-width: 700px;
+		background-color: #fff;
+		padding: 0;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+	.modal-content iframe {
+		width: 100%;
+		height: 400px;
+		border: none;
+	}
+	.close {
+		position: absolute;
+		top: 10px;
+		right: 15px;
+		color: #fff;
+		font-size: 30px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+</style>
+
 <div class="rts-navigation-area-breadcrumb">
 	<div class="container">
 		<div class="row">
@@ -33,7 +94,7 @@ get_header();
 
 				<div class="single-store-area-start">
 					<div class="video" data-video="https://www.youtube.com/embed/ANYfx4-jyqY">
-						<img src="assets/images/about/02.jpg" alt="store_area">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/02.jpg" alt="store_area">
 						<div class="overlay"></div>
 						<a href="javascript:void(0);">
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +178,7 @@ get_header();
 
 				<div class="single-store-area-start">
 					<div class="video" data-video="https://www.youtube.com/embed/ANYfx4-jyqY">
-						<img src="assets/images/about/02.jpg" alt="store_area">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/02.jpg" alt="store_area">
 						<div class="overlay"></div>
 						<a href="javascript:void(0);">
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -140,6 +201,54 @@ get_header();
 	</div>
 </div>
 <!-- about area end -->
+
+<!-- Modal -->
+<div id="videoModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script defer src="<?php echo get_template_directory_uri(); ?>/assets/js/plugins.js"></script> <!-- custom js -->
+<script defer src="<?php echo get_template_directory_uri(); ?>/assets/js/main.js"></script> <!-- header style two End -->
+
+<!-- JavaScript -->
+<script>
+    // Get modal element
+    var modal = document.getElementById("videoModal");
+    var videoFrame = document.getElementById("videoFrame");
+
+    // Get close button
+    var closeBtn = document.getElementsByClassName("close")[0];
+
+    // Get video elements
+    var videoElements = document.querySelectorAll('.video');
+
+    // Add click event to video elements
+    videoElements.forEach(function(videoElement) {
+        videoElement.addEventListener('click', function() {
+            var videoUrl = this.getAttribute('data-video');
+            videoFrame.src = videoUrl;
+            modal.style.display = "flex";
+        });
+    });
+
+    // Close modal when the close button is clicked
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+        videoFrame.src = ""; // Stop the video
+    }
+
+    // Close modal when clicking outside the modal content
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            videoFrame.src = ""; // Stop the video
+        }
+    }
+</script>
+
 
 <?php 
 get_footer();

@@ -143,8 +143,16 @@ background-size: cover;">
 
                             $media_icon = get_sub_field('wtn_media','options');
                             $media_link = get_sub_field('wtn_link','options');
+
+                            if( $media_link ){
+                                $media = $media_link;
+                                $target_to = '_blank';
+                            }else{
+                                $media = '#';
+                                $target_to = '_self';
+                            }
                          ?>
-                        <li><a href="<?php echo $media_link; ?>" target="_blank" ><i class="fa-brands <?php echo $media_icon; ?>"></i></a></li>
+                        <li><a href="<?php echo $media; ?>" target="<?php echo $target_to; ?>" ><i class="fa-brands <?php echo $media_icon; ?>"></i></a></li>
 
                     <?php endwhile; ?>
                       
@@ -511,7 +519,6 @@ background-size: cover;">
     </svg>
 </div>
 <!-- progress area end -->
-
 
 <?php wp_footer(); ?>
 
