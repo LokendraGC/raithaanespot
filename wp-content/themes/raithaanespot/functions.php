@@ -140,11 +140,14 @@ add_action( 'widgets_init', 'raithaanespot_widgets_init' );
 function raithaanespot_scripts() {
 	wp_enqueue_style('raithane-plugincss',get_template_directory_uri(). '/assets/css/plugins.css');
 	wp_enqueue_style('raithane-maincss',get_template_directory_uri(). '/assets/css/style.css');
-
+	
+	wp_enqueue_script('raithane-pluginjs',get_template_directory_uri().'/assets/js/plugins.js',array(),_S_VERSION,true);	
 	wp_enqueue_script('raithane-mainjs',get_template_directory_uri().'/assets/js/main.js',array(),_S_VERSION,true);
 
-	wp_enqueue_script('raithane-pluginjs',get_template_directory_uri().'/assets/js/plugins.js',array(),_S_VERSION,true);	
-
+	wp_localize_script( 'raithane-mainjs', 'RAITHAANEobj', array(
+		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		'token'  => wp_create_nonce( '%RAITHAANE%' ),
+	));
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -186,7 +189,6 @@ if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
 
-
 //classic editor enable
 add_filter('use_block_editor_for_post', '__return_false', 10);
 
@@ -198,3 +200,23 @@ function upload_svg_files( $allowed ) {
     return $allowed;
 }
 add_filter( 'upload_mimes', 'upload_svg_files');
+
+//ajax-functions.php
+add_action( 'wp_ajax_custom_buy_now', 'custom_buy_now' );
+add_action( 'wp_ajax_nopriv_custom_buy_now', 'custom_buy_now' );
+function custom_buy_now() {
+
+	$product_id = intval( $_POST['product_id'] );
+	$quantity = intval( $_POST['quantity'] );
+
+    if ( $product_id > 0 ) {
+        $cart_item_key = WC()->cart->add_to_cart( $product_id, $quantity );
+        if ( $cart_item_key ) {
+			wp_send_json_success( wc_get_checkout_url() );
+        } else {
+            wp_send_json_error();
+        }
+    }
+    wp_send_json_error();
+	
+}
