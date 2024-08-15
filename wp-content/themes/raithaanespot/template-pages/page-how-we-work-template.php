@@ -3,64 +3,9 @@ get_header();
 /* Template Name: How We Work */
 ?>
 
-
 <style>
-	body {
-		font-family: Arial, sans-serif;
-	}
-	.video {
-		position: relative;
-		width: 100%;
-		cursor: pointer;
-	}
-	.video img {
-		width: 100%;
-	}
-	.video a {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		display: block;
-		width: 60px;
-		height: 60px;
-	}
-	/* Modal Styles */
-	.modal {
-		display: none;
-		position: fixed;
-		z-index: 9999;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		overflow: auto;
-		background-color: rgba(0, 0, 0, 0.8);
-		justify-content: center;
-		align-items: center;
-	}
-	.modal-content {
-		position: relative;
-		width: 80%;
-		max-width: 700px;
-		background-color: #fff;
-		padding: 0;
-		border-radius: 10px;
-		overflow: hidden;
-	}
-	.modal-content iframe {
-		width: 100%;
-		height: 400px;
-		border: none;
-	}
-	.close {
-		position: absolute;
-		top: 10px;
-		right: 15px;
-		color: #fff;
-		font-size: 30px;
-		font-weight: bold;
-		cursor: pointer;
+	ul li {
+		list-style: none;
 	}
 </style>
 
@@ -69,11 +14,11 @@ get_header();
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="navigator-breadcrumb-wrapper">
-					<a href="index.html">Home</a>
+					<a href="<?php echo site_url('/'); ?>">Home</a>
 					<i class="fa-regular fa-chevron-right"></i>
-					<a class="current" href="index.html">About Us</a>
+					<a class="current" href="<?php echo site_url('about-us'); ?>">About Us</a>
 					<i class="fa-regular fa-chevron-right"></i>
-					<a class="current" href="index.html">How We Work</a>
+					<a class="current" href="#">How We Work</a>
 				</div>
 			</div>
 		</div>
@@ -87,14 +32,17 @@ get_header();
 </div>
 
 <!-- about area start -->
-<div class="rts-about-area rts-section-gap video">
+<div class="rts-about-area rts-section-gap">
 	<div class="container-3">
 		<div class="row align-items-center">
 			<div class="col-lg-5">
 
 				<div class="single-store-area-start">
-					<div class="video" data-video="https://www.youtube.com/embed/ANYfx4-jyqY">
-						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/02.jpg" alt="store_area">
+					<?php if( $video_url = get_field('video_url_first') ): ?>
+					<div class="video" data-video="<?php echo $video_url; ?>">
+						<?php if( $background_img = get_field('video__background_image_first') ): ?>
+						<img src="<?php echo $background_img['url']; ?>" alt="how we work image">
+					<?php endif; ?>
 						<div class="overlay"></div>
 						<a href="javascript:void(0);">
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,75 +58,32 @@ get_header();
 							</svg>
 						</a>
 					</div>
+				<?php endif; ?>
 				</div>
 			</div>
+			<?php if( $first_content = get_field('content_first') ): ?>
 			<div class="col-lg-7 pl--60 pl_md--10 pt_md--30 pl_sm--10 pt_sm--30">
 				<div class="about-content-area-1">
-					<h2 class="title">
-						Welcome To Raithaane Spot
-					</h2>
-					<p class="disc">
-						Venenatis augue consequat class magnis sed purus, euismod ligula nibh congue quis vestibulum nostra, cubilia varius velit vitae rhoncus. Turpis malesuada fringilla urna dui est torquent aliquet, mi nec fermentum placerat nisi venenatis sapien, mattis nunc nullam rutrum feugiat porta. Pharetra mi nisl consequat semper quam litora aenean eros conubia molestie erat, et cursus integer rutrum sollicitudin auctor curae inceptos senectus sagittis est,
-					</p>
-					<div class="check-main-wrapper">
-						<div class="single-check-area">
-							Elementum sociis rhoncus aptent auctor urna justo
-						</div>
-						<div class="single-check-area">
-							Habitasse venenatis gravida nisl, sollicitudin posuere
-						</div>
-						<div class="single-check-area">
-							Uisque cum convallis nostra in sapien nascetur, netus
-						</div>
-						<div class="single-check-area">
-							Class nunc aliquet nulla dis senectus lputate porta
-						</div>
-						<div class="single-check-area">
-							Aenean gravida a est ante nisl nostra dui hendrerit
-						</div>
-						<div class="single-check-area">
-							Bibendum venenatis dignissim non himenaeos eget
-						</div>
-					</div>
+					<?php echo $first_content; ?>
 				</div>
 			</div>
+		<?php endif; ?>
 		</div>
 		<div class="row align-items-center innver-in-mobile">
 			<div class="col-lg-7 pl--60 pl_md--10 pt_md--30 pl_sm--10 pt_sm--30">
+				<?php if( $second_content = get_field('content_second') ): ?>
 				<div class="about-content-area-1">
-					<h2 class="title">
-						Welcome To Raithaane Spot
-					</h2>
-					<p class="disc">
-						Venenatis augue consequat class magnis sed purus, euismod ligula nibh congue quis vestibulum nostra, cubilia varius velit vitae rhoncus. Turpis malesuada fringilla urna dui est torquent aliquet, mi nec fermentum placerat nisi venenatis sapien, mattis nunc nullam rutrum feugiat porta. Pharetra mi nisl consequat semper quam litora aenean eros conubia molestie erat, et cursus integer rutrum sollicitudin auctor curae inceptos senectus sagittis est,
-					</p>
-					<div class="check-main-wrapper">
-						<div class="single-check-area">
-							Elementum sociis rhoncus aptent auctor urna justo
-						</div>
-						<div class="single-check-area">
-							Habitasse venenatis gravida nisl, sollicitudin posuere
-						</div>
-						<div class="single-check-area">
-							Uisque cum convallis nostra in sapien nascetur, netus
-						</div>
-						<div class="single-check-area">
-							Class nunc aliquet nulla dis senectus lputate porta
-						</div>
-						<div class="single-check-area">
-							Aenean gravida a est ante nisl nostra dui hendrerit
-						</div>
-						<div class="single-check-area">
-							Bibendum venenatis dignissim non himenaeos eget
-						</div>
-					</div>
-				</div>
+					<?php echo $second_content; ?>				</div>
+			<?php endif; ?>
 			</div>
 			<div class="col-lg-5">
 
+				<?php if( $sec_video_url = get_field('video_url_second') ): ?>
 				<div class="single-store-area-start">
-					<div class="video" data-video="https://www.youtube.com/embed/ANYfx4-jyqY">
-						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/about/02.jpg" alt="store_area">
+					<div class="video" data-video="<?php echo $sec_video_url; ?>">
+						<?php if( $sec_img  = get_field('video__background_image_second') ): ?>
+						<img src="<?php echo $sec_img['url']; ?>" alt="How we work image">
+					<?php endif; ?>
 						<div class="overlay"></div>
 						<a href="javascript:void(0);">
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -195,59 +100,57 @@ get_header();
 						</a>
 					</div>
 				</div>
+			<?php endif; ?>
 			</div>
 
 		</div>
 	</div>
 </div>
 <!-- about area end -->
-
 <!-- Modal -->
 <div id="videoModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+	<div class="modal-content">
+		<span class="close">&times;</span>
+		<iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
 </div>
-
-<script defer src="<?php echo get_template_directory_uri(); ?>/assets/js/plugins.js"></script> <!-- custom js -->
-<script defer src="<?php echo get_template_directory_uri(); ?>/assets/js/main.js"></script> <!-- header style two End -->
 
 <!-- JavaScript -->
 <script>
     // Get modal element
-    var modal = document.getElementById("videoModal");
-    var videoFrame = document.getElementById("videoFrame");
+	var modal = document.getElementById("videoModal");
+	var videoFrame = document.getElementById("videoFrame");
 
     // Get close button
-    var closeBtn = document.getElementsByClassName("close")[0];
+	var closeBtn = document.getElementsByClassName("close")[0];
 
     // Get video elements
-    var videoElements = document.querySelectorAll('.video');
+	var videoElements = document.querySelectorAll('.video');
 
     // Add click event to video elements
-    videoElements.forEach(function(videoElement) {
-        videoElement.addEventListener('click', function() {
-            var videoUrl = this.getAttribute('data-video');
-            videoFrame.src = videoUrl;
-            modal.style.display = "flex";
-        });
-    });
+	videoElements.forEach(function(videoElement) {
+		videoElement.addEventListener('click', function() {
+			var videoUrl = this.getAttribute('data-video');
+			videoFrame.src = videoUrl;
+			modal.style.display = "flex";
+		});
+	});
 
     // Close modal when the close button is clicked
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
+	closeBtn.onclick = function() {
+		modal.style.display = "none";
         videoFrame.src = ""; // Stop the video
     }
 
     // Close modal when clicking outside the modal content
     window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    	if (event.target == modal) {
+    		modal.style.display = "none";
             videoFrame.src = ""; // Stop the video
         }
     }
 </script>
+
 
 
 <?php 

@@ -19,7 +19,70 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon.svg">
 
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .video {
+        position: relative;
+        width: 100%;
+/*        cursor: pointer;*/
+    }
+    .video img {
+        width: 100%;
+    }
+    .video a {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 60px;
+        height: 60px;
+    }
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        position: relative;
+        width: 80%;
+        max-width: 700px;
+        background-color: #fff;
+        padding: 0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .modal-content iframe {
+        width: 100%;
+        height: 400px;
+        border: none;
+    }
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #fff;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+
 <?php wp_head(); ?>
+
+
 </head>
 
 <body <?php body_class(); ?>>

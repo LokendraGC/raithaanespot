@@ -10,31 +10,157 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<?php $offer_image = get_field('offer_image'); ?>
+<style>
+	.related_img{
+		height: 78px;
+	}
+	.blog-sidebar-single-wized.with-add{
+	    background-image: url(<?php echo $offer_image ? $offer_image['url'] : get_template_directory_uri() .  '/assets/images/blog/thumb/12.jpg' ; ?>);
+	}
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+</style>
 
-			get_template_part( 'template-parts/content', get_post_type() );
+<div class="rts-navigation-area-breadcrumb">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="navigator-breadcrumb-wrapper">
+					<a href="<?php echo site_url('/'); ?>">Home</a>
+					<i class="fa-regular fa-chevron-right"></i>
+					<a class="current" href="<?php echo site_url('blog'); ?>">Blog</a>
+					<i class="fa-regular fa-chevron-right"></i>
+					<a class="current" href="#"><?php the_title(); ?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'raithaanespot' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'raithaanespot' ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
+<div class="section-seperator">
+	<div class="container">
+		<hr class="section-seperator">
+	</div>
+</div>
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
 
-		endwhile; // End of the loop.
-		?>
+<!-- blog sidebar area start -->
+<div class="blog-sidebar-area rts-section-gap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-lg-1 order-md-2 order-sm-2 order-2">
+				<div class="blog-details-area-1">
+					<?php if( has_post_thumbnail() ): ?>
+						<div class="thumbnail">
+							<img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
+						</div>
+					<?php endif; ?>
+					<div class="body-content-blog-details">
+						<div class="top-tag-time">
+							<div class="single">
+								<i class="fa-solid fa-clock"></i>
+								<span><?php echo get_the_date('j, M Y'); ?></span>
+							</div>
+						</div>
+						<?php the_content(); ?>
+						<div class="tag-social-share-wrapper-area-wrapper">
+							<?php if( have_rows('tag_details') ): ?>
+								<div class="tags-area">
+									<span>Tags</span>
+									<?php
+									while( have_rows('tag_details') ):the_row();
+										$tag_title = get_sub_field('tag_title');
+										?>
+										<button><?php echo $tag_title; ?></button>
+									<?php endwhile; ?>
 
-	</main><!-- #main -->
+								</div>
+							<?php endif; ?>
+							<div class="social-icons">
+								<span>Social Icon</span>
+								<ul>
+									<li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+									<li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+									<li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+								</ul>
+							</div>
+						</div>
 
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 pl--60 order-lg-2 order-md-1 order-sm-1 order-1 pl_md--10 pl_sm--10 rts-sticky-column-item">
+
+				<?php 
+				$unique_id = get_the_ID();
+				$args = array(
+					'post_type' => 'post',
+					'post_status' => 'publish',
+					'posts_per_page' => -1,
+					'post__not_in' => array( $unique_id )
+				);
+				$related_posts = get_posts( $args );
+				if( $related_posts ):
+					?>
+					<div class="blog-sidebar-single-wized with-title">
+						<h4 class="title">Related Post</h4>
+						<div class="latest-post-small-area-wrapper">
+							<!-- single latest post -->
+							<?php 
+							foreach( $related_posts as $post ):
+								setup_postdata($post);
+								?>
+								<div class="single-latest-post-area">
+									<?php if( $image_url = wp_get_attachment_url(get_post_thumbnail_id($post->ID)) ): ?>
+									<a href="<?php echo get_the_permalink($post->ID); ?>" class="thumbnail">
+										<img class="related_img" src="<?php echo $image_url; ?>" alt="<?php the_title(); ?>">
+									</a>
+								<?php endif; ?>
+									<div class="inner-content-area">
+										<div class="icon-top-area">
+											<i class="fa-light fa-clock"></i>
+											<span><?php echo get_the_date('M j, Y'); ?></span>
+										</div>
+										<a href="<?php echo get_the_permalink($post->ID); ?>">
+											<h5 class="title-sm-blog">
+												<?php echo $post->post_title; ?>
+											</h5>
+										</a>
+									</div>
+								</div>
+								<?php 
+							endforeach;
+							wp_reset_postdata();
+							?>
+
+						</div>
+					</div>
+				<?php endif; ?>
+
+
+				<div class="blog-sidebar-single-wized with-add bg_image">
+					<div class="add-are-content">
+						<?php if( $offer_details = get_field('offer_detail') ): ?>
+							<?php echo $offer_details; ?>
+						<?php endif; ?>
+						<a href="#" class="shop-now-goshop-btn">
+							<span class="text">Shop Now</span>
+							<div class="plus-icon">
+								<i class="fa-sharp fa-regular fa-plus"></i>
+							</div>
+							<div class="plus-icon">
+								<i class="fa-sharp fa-regular fa-plus"></i>
+							</div>
+						</a>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- blog sidebar area ends -->
 <?php
-get_sidebar();
 get_footer();
