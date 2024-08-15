@@ -154,6 +154,10 @@ require get_template_directory() . '/inc/template-functions.php';
 // adding widgets
 require get_template_directory() . '/inc/widgets.php';
 
+// adding widgets
+require get_template_directory() . '/inc/navwalker-menu.php';
+
+
 /**
  * Customizer additions.
  */

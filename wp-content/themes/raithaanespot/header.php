@@ -301,24 +301,20 @@
                                     </ul>
                                 </div>
                                 <div class="nav-area">
-                                    <nav>
-                                        <ul class="parent-nav">
-                                            <li class="parent has-dropdown">
-                                                <a href="index.html">Home</a>
-                                                
-                                                <li class="parent has-dropdown">
-                                                    <a class="nav-link" href="#">About us</a>
-                                                    <ul class="submenu">
-                                                        <li><a class="sub-b" href="about.html">Who we are</a></li>
-                                                        <li><a class="sub-b" href="about.html">Why organic</a></li>
-                                                        <li><a class="sub-b" href="about.html">How we work</a></li>
-                                                    </ul>
-                                                </li>
-                                                
-                                                <li class="parent"><a href="blog.html">Blogs</a></li>
-                                                <li class="parent"><a href="contact.html">Contact</a></li>
-                                            </ul>
-                                        </nav>
+                                     <?php
+                                   $menu_args = array(
+                                             'theme_location'  => 'menu-1',  
+                                           'menu_class'      => 'parent-nav',  // Class for the <ul> element
+                                           'menu_id'         => '', // ID for the <ul> element
+                                           'container'       => 'nav',       // Wrapping element, set to 'nav'
+                                           'container_class' => '', // Class for the <nav> element
+                                           'container_id'    => '',    // ID for the <nav> element
+                                           'depth'           => 2,           // 1 means no dropdown
+                                           'walker'          => new Raithaane_Walker_Nav_Menu(),
+                                       );
+
+                                   wp_nav_menu($menu_args);
+                                   ?>
                                     </div>
                                 </div>
                                 <!-- button-area -->
