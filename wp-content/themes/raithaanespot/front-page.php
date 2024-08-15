@@ -1410,17 +1410,26 @@
                                         
 
 
+                                        <?php   $ppp = -1;
+                                        $args = array(
+                                            'post_type' => 'testimonial',
+                                            'posts_per_page' =>  $ppp,
+                                            'post_status' => 'publish'
+                                        );
 
-                                        <!-- rts categorya area start -->
-                                        <div class="rts-category-area rts-section-gap testimonials  ">
+                                        $testi_data = get_posts( $args );
+                                        if( $testi_data ):
+                                         ?>
+                                         <!-- rts categorya area start -->
+                                         <div class="rts-category-area rts-section-gap testimonials  ">
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="title-area-between">
                                                             <h2 class="title-left mb--0">
-                                                             What our Client says
-                                                         </h2>
-                                                         <div class="next-prev-swiper-wrapper">
+                                                               What our Client says
+                                                           </h2>
+                                                           <div class="next-prev-swiper-wrapper">
                                                             <div class="swiper-button-prev"><i class="fa-regular fa-chevron-left"></i></div>
                                                             <div class="swiper-button-next"><i class="fa-regular fa-chevron-right"></i></div>
                                                         </div>
@@ -1468,270 +1477,67 @@
                                                                                                     }'>
                                                                                                     <div class="swiper-wrapper">
                                                                                                         <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
+                                                                                                        <?php foreach( $testi_data as $post ):
+                                                                                                            setup_postdata($post);
+                                                                                                            ?>
+                                                                                                            <div class="swiper-slide">
+                                                                                                                <div class="blog-details-author mb-20">
+                                                                                                                    <?php if( $image_url = wp_get_attachment_url(get_post_thumbnail_id($post->ID)) ): ?>
+                                                                                                                        <div class="thumbnail">
+                                                                                                                            <img src="<?php echo $image_url; ?>" alt="<?php echo $post->post_title; ?>">
+                                                                                                                        </div>
+                                                                                                                    <?php endif; ?>
+                                                                                                                    <?php if( $rating = get_field('wtn_rating') ): ?>
+                                                                                                                        <div class="author-information">
 
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <!-- single swiper start -->
-                                                                                                        <div class="swiper-slide">
-                                                                                                            <div class="blog-details-author mb-20">
-                                                                                                                <div class="thumbnail">
-                                                                                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/01.png" alt="">
-                                                                                                                </div>
-                                                                                                                <div class="author-information">
-                                                                                                                    
-                                                                                                                    <h5 class="title">Venilla Walton</h5>
-                                                                                                                    <div class="stars">
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                        <i class="fa-solid fa-star"></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="content-area">
-                                                                                                                        <p>
-                                                                                                                            Donec sollicitudin molestie malesuada. Pellentesque in ipsum  orci porta dapibus ac di sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo orem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <!-- single swiper start -->
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- rts category area end -->
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                                                                            <h5 class="title"><?php echo $post->post_title; ?></h5>
+                                                                                                                            <div class="stars">
+                                                                                                                                <?php for( $i = 1; 
+                                                                                                                                    $i<= $rating; $i++ ){ ?>
+                                                                                                                                        <i class="fa-solid fa-star"></i>
+                                                                                                                                    <?php } ?>
+                                                                                                                                    
+                                                                                                                                </div>
+                                                                                                                                <div class="content-area">
+                                                                                                                                    <p>
+                                                                                                                                     <?php echo $post->post_content; ?>
+                                                                                                                                 </p>
+                                                                                                                             </div>
+                                                                                                                         </div>
+                                                                                                                     <?php endif; ?>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                             <?php
+                                                                                                         endforeach;
+                                                                                                         wp_reset_postdata();
+                                                                                                         ?>
+                                                                                                         <!-- single swiper start -->
+                                                                                                         
+                                                                                                     </div>
+                                                                                                 </div>
+                                                                                             </div>
+                                                                                         </div>
+                                                                                     </div>
+                                                                                 </div>
+                                                                             </div>
+                                                                             <!-- rts category area end -->
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     <?php endif; ?>
                                                         <!-- rts categorya area end -->
                                                         <!-- rts categorya area start -->
+                                                        <?php 
+                                                        $args = array(
+                                                            'post_type' => 'post',
+                                                            'post_status' => 'publish',
+                                                            'posts_per_page' => 3,
+                                                        );
+                                                        $post_data = new WP_Query( $args );
+                                                        if( $post_data->have_posts() ):
+                                                            ?>
                                                         <div class="rts-blog-area rts-section-gap cover-card-main-over ">
                                                             <div class="container">
                                                                 <div class="row">
@@ -1754,26 +1560,30 @@
                                                                                             
                                                                                             <!-- single swiper start -->
                                                                                             <!-- single swiper start -->
+                                                                                            <?php
+                                                                                             while( $post_data->have_posts() ): $post_data->the_post();
+                                                                                             ?>
                                                                                             <div class="col-xl-4 col-lg-4 col-md-6">
                                                                                                 <div class="single-blog-area-start">
-                                                                                                    <a href="blog-details.html" class="thumbnail">
-                                                                                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/02.jpg" alt="blog-area">
+                                                                                                    <?php if( has_post_thumbnail() ): ?>
+                                                                                                    <a href="<?php the_permalink(); ?>" class="thumbnail">
+                                                                                                        <img class="front_feature_image" src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
                                                                                                     </a>
+                                                                                                <?php endif; ?>
                                                                                                     <div class="blog-body">
                                                                                                         <div class="top-area">
                                                                                                             <div class="single-meta">
                                                                                                                 <i class="fa-light fa-clock"></i>
-                                                                                                                <span>15 Sep, 2023</span>
+                                                                                                                <span><?php echo get_the_date('M j, Y'); ?></span>
                                                                                                             </div>
                                                                                                             
                                                                                                         </div>
-                                                                                                        <a href="blog-details.html">
+                                                                                                        <a href="<?php the_permalink(); ?>">
                                                                                                             <h4 class="title">
-                                                                                                                Fashion Fixation: Fueling Your Passion
-                                                                                                                for All Things Stylish
+                                                                                                               <?php the_title(); ?>
                                                                                                             </h4>
                                                                                                         </a>
-                                                                                                        <a href="blog-details.html" class="shop-now-goshop-btn">
+                                                                                                        <a href="<?php the_permalink(); ?>" class="shop-now-goshop-btn">
                                                                                                             <span class="text">Read Details</span>
                                                                                                             <div class="plus-icon">
                                                                                                                 <i class="fa-sharp fa-regular fa-plus"></i>
@@ -1785,72 +1595,11 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <!-- single swiper start -->
-                                                                                            <!-- single swiper start -->
-                                                                                            <div class="col-xl-4 col-lg-4 col-md-6">
-                                                                                                <div class="single-blog-area-start">
-                                                                                                    <a href="blog-details.html" class="thumbnail">
-                                                                                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/03.jpg" alt="blog-area">
-                                                                                                    </a>
-                                                                                                    <div class="blog-body">
-                                                                                                        <div class="top-area">
-                                                                                                            <div class="single-meta">
-                                                                                                                <i class="fa-light fa-clock"></i>
-                                                                                                                <span>15 Sep, 2023</span>
-                                                                                                            </div>
-                                                                                                            
-                                                                                                        </div>
-                                                                                                        <a href="blog-details.html">
-                                                                                                            <h4 class="title">
-                                                                                                                Fashion Fixation: Fueling Your Passion
-                                                                                                                for All Things Stylish
-                                                                                                            </h4>
-                                                                                                        </a>
-                                                                                                        <a href="blog-details.html" class="shop-now-goshop-btn">
-                                                                                                            <span class="text">Read Details</span>
-                                                                                                            <div class="plus-icon">
-                                                                                                                <i class="fa-sharp fa-regular fa-plus"></i>
-                                                                                                            </div>
-                                                                                                            <div class="plus-icon">
-                                                                                                                <i class="fa-sharp fa-regular fa-plus"></i>
-                                                                                                            </div>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <!-- single swiper start -->
-                                                                                            <!-- single swiper start -->
-                                                                                            <div class="col-xl-4 col-lg-4 col-md-6">
-                                                                                                <div class="single-blog-area-start">
-                                                                                                    <a href="blog-details.html" class="thumbnail">
-                                                                                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/04.jpg" alt="blog-area">
-                                                                                                    </a>
-                                                                                                    <div class="blog-body">
-                                                                                                        <div class="top-area">
-                                                                                                            <div class="single-meta">
-                                                                                                                <i class="fa-light fa-clock"></i>
-                                                                                                                <span>15 Sep, 2023</span>
-                                                                                                            </div>
-                                                                                                            
-                                                                                                        </div>
-                                                                                                        <a href="blog-details.html">
-                                                                                                            <h4 class="title">
-                                                                                                                Fashion Fixation: Fueling Your Passion
-                                                                                                                for All Things Stylish
-                                                                                                            </h4>
-                                                                                                        </a>
-                                                                                                        <a href="blog-details.html" class="shop-now-goshop-btn">
-                                                                                                            <span class="text">Read Details</span>
-                                                                                                            <div class="plus-icon">
-                                                                                                                <i class="fa-sharp fa-regular fa-plus"></i>
-                                                                                                            </div>
-                                                                                                            <div class="plus-icon">
-                                                                                                                <i class="fa-sharp fa-regular fa-plus"></i>
-                                                                                                            </div>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                        <?php 
+                                                                                    endwhile;
+                                                                                    wp_reset_postdata();
+                                                                                     ?>
+                                                                                        
                                                                                         </div>
                                                                                     </div>
                                                                                     <!-- rts category area end -->
@@ -1862,7 +1611,10 @@
 
                                                             </div>
                                                         </div>
+
                                                         <!-- rts categorya area end -->
 
 
-<?php get_footer(); ?>
+<?php
+endif;
+ get_footer(); ?>

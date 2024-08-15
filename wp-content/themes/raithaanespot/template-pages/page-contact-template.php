@@ -8,9 +8,9 @@ get_header();
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="navigator-breadcrumb-wrapper">
-					<a href="index.html">Home</a>
+					<a href="<?php echo site_url('/'); ?>">Home</a>
 					<i class="fa-regular fa-chevron-right"></i>
-					<a class="current" href="index.html">Contact</a>
+					<a class="current" href="#">Contact</a>
 				</div>
 			</div>
 		</div>
@@ -27,41 +27,46 @@ get_header();
 		<div class="row">
 			<div class="col-lg-4">
 				<div class="contact-left-area-main-wrapper">
-					<h2 class="title">
-						You can ask us questions !
-					</h2>
-					<p class="disc">
-						Contact us for all your questions and opinions, or you can solve your problems in a shorter time with our contact offices.
-					</p>
+					<?php the_content(); ?>
+
+					<?php if( $address = get_field('wtn_address','options') ): ?>
 					<div class="location-single-card">
 						<div class="icon">
 							<i class="fa-light fa-location-dot"></i>
 						</div>
 						<div class="information">
-							<h3 class="title">Lazimpat Kathmandu Nepal</h3>
+							<h3 class="title"><?php echo $address; ?></h3>
 						</div>
 					</div>
+				<?php endif; ?>
+				<?php if( $phone = get_field('wtn_phone_number','options') ): ?>
 					<div class="location-single-card">
 						<div class="icon">
 							<i class="fa-light fa-phone-rotary"></i>
 						</div>
 						<div class="information">
-							<h3 class="title">+977-9876543210</h3>
+							<h3 class="title"><a href="tel:<?php echo $phone; ?>" target="_blank" ><?php echo $phone; ?></a></h3>
 						</div>
 					</div>
+				<?php endif; ?>
+				<?php if( $mail = get_field('wtn_email_address','options') ): ?>
 					<div class="location-single-card">
 						<div class="icon">
 							<i class="fa-light fa-envelope"></i>
 						</div>
 						<div class="information">
-							<h3 class="title">info@raithaanespot.com</h3>
+							<h3 class="title"><a href="mailto:<?php echo $mail; ?>" 
+								target="_blank "><?php echo $mail; ?></a></h3>
 						</div>
 					</div>
+				<?php endif; ?>
 				</div>
 			</div>
+			<?php if( $map_url = get_field('wtn_map_iframe_url','options') ): ?>
 			<div class="col-lg-8 pl--50 pl_sm--5 pl_md--5">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7063.691626472377!2d85.3214872!3d27.7220465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1919f7dd0685%3A0xc59baa0caae9c83d!2sLazimpat%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1722927140768!5m2!1sen!2snp" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+				<?php echo $map_url; ?>
 			</div>
+		<?php endif; ?>
 		</div>
 	</div>
 </div>
@@ -77,33 +82,16 @@ get_header();
 						<div class="col-lg-7 pr--30 pr_md--10 pr_sm--5">
 							<div class="contact-form-wrapper-1">
 								<h3 class="title mb--50">Fill Up The Form If You Have Any Question</h3>
-								<form action="#" class="contact-form-1">
-									<div class="contact-form-wrapper--half-area">
-										<div class="single">
-											<input type="text" placeholder="name*">
-										</div>
-										<div class="single">
-											<input type="text" placeholder="Email*">
-										</div>
-									</div>
-									<div class="contact-form-wrapper--half-area">
-										<div class="single">
-											<input type="text" placeholder="Contact*">
-										</div>
-										<div class="single">
-											<input type="text" placeholder="Address*">
-										</div>
-									</div>
-									<textarea name="message" placeholder="Write Message Here"></textarea>
-									<button class="rts-btn btn-primary mt--20">Send Message</button>
-								</form>
+								<?php echo do_shortcode('[contact-form-7 id="df7b697" title="Contact form" html_class = "contact-form-1"]') ?>
 							</div>
 						</div>
+						<?php if( has_post_thumbnail() ): ?>
 						<div class="col-lg-5 mt_md--30 mt_sm--30">
 							<div class="thumbnail-area">
-								<img src="assets/images/contact.jpg" alt="contact_form">
+								<img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="Contact Image">
 							</div>
 						</div>
+					<?php endif; ?>
 					</div>
 				</div>
 			</div>

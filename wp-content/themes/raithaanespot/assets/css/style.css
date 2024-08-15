@@ -26006,3 +26006,11 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
     margin-bottom: 30px;
   }
 }
+
+.feature_img{
+  height: 200px;
+}
+
+.front_feature_image{
+  height: 305px;
+}

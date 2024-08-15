@@ -82,32 +82,16 @@ background-size: cover;">
                 </div>
                 <!-- single footer area wrapper -->
                 <!-- single footer area wrapper -->
-                <div class="single-footer-wized">
-                    <h3 class="footer-title">Useful Links</h3>
-                    <div class="footer-nav">
-                        <ul>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Support Center</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                </div>
+              
+              <?php if(is_active_sidebar('footer-menu-first')): ?>
+                <?php dynamic_sidebar('footer-menu-first'); ?>
+              <?php endif; ?>
+
                 <!-- single footer area wrapper -->
                 <!-- single footer area wrapper -->
-                <div class="single-footer-wized">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <div class="footer-nav">
-                        <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Information</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Nest Stories</a></li>
-                        </ul>
-                    </div>
-                </div>
+               <?php if(is_active_sidebar('footer-menu-second')): ?>
+                <?php dynamic_sidebar('footer-menu-second'); ?>
+              <?php endif; ?>
                 <!-- single footer area wrapper -->
                 <!-- single footer area wrapper -->
                 
