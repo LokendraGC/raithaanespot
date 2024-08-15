@@ -3,6 +3,12 @@ get_header();
 /* Template Name: Blogs */
 ?>
 
+<style>
+    .feature_img{
+        height: 200px;
+    }
+</style>
+
     <div class="rts-navigation-area-breadcrumb">
         <div class="container">
             <div class="row">
@@ -43,7 +49,7 @@ get_header();
                     <div class="single-blog-style-card-border">
                         <?php if( has_post_thumbnail() ): ?>
                         <a href="<?php the_permalink(); ?>" class="thumbnail">
-                            <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
+                            <img class="feature_img" src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
                         </a>
                     <?php endif; ?>
                         <div class="inner-content-body">
