@@ -775,11 +775,65 @@
     zoomer.style.backgroundPosition = x + '% ' + y + '%';
   }
 
+  
+/**
+ * Theme main script.
+ *
+ * Contains all theme custom features.
+ */
+var wtn;
+( function($) {
+   wtn = {
+	   init: function () {
+		   this.add_to_cart_mini();         
+	   },
+	   ie: function () {
+		   try {
+			  if (/MSIE (\d+\.\d+);/.test(navigator.userAgent) || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+				 $('body').addClass('ie-user');
+				 return true;
+			 }
+		 } catch (err) {
+		  console.log(err);
+	  }
+	  return false;
+  },
+
+  add_to_cart_mini: () => {
+
+    var ajaxURL = RAITHAANEobj.ajaxurl;
+      
+    jQuery('#buy-now-button').on('click', function(e) {
+      e.preventDefault();
+      var productId = $(this).data('product-id');
+      var quantity = $('.qty').val();
+      jQuery.ajax({
+        type: 'POST',
+        url: ajaxURL,
+        data: {
+            'action': 'custom_buy_now',
+            'product_id': productId,
+            'quantity'  : quantity
+        },
+        beforeSend : function ( xhr ) {
+          jQuery("body").addClass("processing");
+        },
+        success: function(response) {
+          jQuery("body").removeClass("processing");
+          if (response.success) {
+              // Redirect to the URL returned by the PHP function
+              window.location.href = response.data;
+          } else {
+              console.log('Error adding product to cart.');
+          }
+      }
+      });
+    });
+  },
 
 
-
-
-
-
-
-
+};
+$(function () {
+   wtn.init();
+});
+})(jQuery);

@@ -78,6 +78,20 @@
         font-weight: bold;
         cursor: pointer;
     }
+    .processing:before{
+        background: rgba(0, 0, 0, 0.55) url('<?php echo get_template_directory_uri(); ?>/assets/images/loading.svg') no-repeat 50% 50%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        content: "";
+        z-index: 100000000000000;    
+        height: 100%;
+        width: 100%;    
+        opacity: 1;  
+    } 
+    .processing {    
+        position: relative;    
+    }
 </style>
 
 <?php wp_head(); ?>

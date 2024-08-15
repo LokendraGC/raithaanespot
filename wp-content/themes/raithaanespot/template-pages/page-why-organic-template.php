@@ -2,8 +2,6 @@
 get_header();
 /* Template Name: Why Organic */
 ?>
-
-
 <div class="rts-navigation-area-breadcrumb">
 	<div class="container">
 		<div class="row">
@@ -19,14 +17,11 @@ get_header();
 		</div>
 	</div>
 </div>
-<!-- rts contact main wrapper end -->
 <div class="section-seperator">
 	<div class="container">
 		<hr class="section-seperator">
 	</div>
 </div>
-
-<!-- about area start -->
 <div class="rts-about-area rts-section-gap video">
 	<div class="container-3">
 		<div class="row align-items-center">
@@ -140,7 +135,5 @@ get_header();
 		</div>
 	</div>
 </div>
-<!-- about area end -->
-
 <?php 
 get_footer();
