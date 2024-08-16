@@ -47,7 +47,14 @@ class Raithaane_Walker_Nav_Menu extends Walker {
 		$indent = str_repeat( $t, $depth );
 
 		// Default class.
-		$classes = array( 'submenu' );
+			if( wp_is_mobile() ){
+
+				$ul_class = 'submenu mm-collapse'; 
+			}else{
+				$ul_class = 'submenu';
+			}
+
+		$classes = array( $ul_class );
 
 		/**
 		 * Filters the CSS class(es) applied to a menu list element.
@@ -137,12 +144,23 @@ class Raithaane_Walker_Nav_Menu extends Walker {
 
 		$classes   = empty( $menu_item->classes ) ? array() : (array) $menu_item->classes;
 		$classes[] = 'menu-item-' . $menu_item->ID;
-		$classes[]= '';
+		$classes = [];
 
 		if( $this->has_children )
 		{
-			$classes[] = 'parent has-dropdown'; //classes of li inside ul <ul>=><li>=><ul>=><li class="from here">
+		    //classes of li inside ul <ul>=><li>=><ul>=><li class="from here">
+			$classes[] = 'parent has-dropdown';
 		}
+
+
+		if( $this->has_children && wp_is_mobile()){
+			$classes = array();
+
+			$classes[] = 'has-droupdown';
+
+		}
+
+
 
 		/**
 		 * Filters the arguments for a single nav menu item.
@@ -219,12 +237,18 @@ class Raithaane_Walker_Nav_Menu extends Walker {
 				$atts['rel'] = empty( $atts['rel'] ) ? 'privacy-policy' : $atts['rel'] . ' privacy-policy';
 			}
 
-			$atts['href'] = $menu_item->url;
+			$atts['href'] = ( $this->has_children ) ? '#' : $menu_item->url;
 		} else {
 			$atts['href'] = '';
 		}
 
 		$atts['aria-current'] = $menu_item->current ? 'page' : '';
+
+		if ( wp_is_mobile() ) {
+
+			$atts['class'] = ( $depth > 0 ) ? 'mobile-menu-link' : 'main';
+		
+		}
 
 		/**
 		 * Filters the HTML attributes applied to a menu item's anchor element.
@@ -264,6 +288,13 @@ class Raithaane_Walker_Nav_Menu extends Walker {
 		$title = apply_filters( 'nav_menu_item_title', $title, $menu_item, $args, $depth );
 
 		$item_output  = $args->before;
+
+		// if( wp_is_mobile() && !$this->has_children() ){
+        
+        // $attributes .= 'class="main"';
+
+		// }
+
 		$item_output .= '<a' . $attributes . '>';
 		$item_output .= $args->link_before . $title . $args->link_after;
 		$item_output .= '</a>';
