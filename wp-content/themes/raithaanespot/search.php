@@ -9,45 +9,149 @@
 
 get_header();
 ?>
+<?php
+$search_text = $_GET['s']; // Assuming the search text is coming from a GET parameter
 
-	<main id="primary" class="site-main">
+// 1. Query for products
+$product_args = array(
+	'post_type' => 'product',
+	'post_status' => 'publish',
+	'posts_per_page' => -1, // Get all matching products
+	's' => $search_text,
+	'search_columns' => array('post_title', 'post_content'),
+);
 
-		<?php if ( have_posts() ) : ?>
+$product_query = new WP_Query($product_args);
+$product_count = $product_query->found_posts;
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'raithaanespot' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
+// 2. Query for categories
+$category_args = array(
+	'taxonomy' => 'product_cat',
+	'hide_empty' => false,
+	'name__like' => $search_text, // Look for categories with names like the search text
+);
+
+$categories = get_terms($category_args);
+$category_count = count($categories);
+
+// 3. Determine whether the search is more likely for products or categories
+if ($product_count > 0) {
+	// Display product results if found
+	?>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="tab-content" id="myTabContent">
+				<!-- first tabs area start-->
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<div class="row g-4">
+						<?php
+						while ($product_query->have_posts()) {
+							$product_query->the_post();
+
+							$product_id = get_the_ID();
+							$product = wc_get_product($product_id);
+							$sale_price = $product->get_sale_price();
+							$regular_price = $product->get_regular_price();
+							$weight = get_field('product_weight', $product_id);
+							$image_url = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID()));
+
+							?>
+							<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 d-flex">
+								<div class="single-shopping-card-one">
+									<!-- iamge and sction area start -->
+									<div class="image-and-action-area-wrapper">
+										<a href="<?php the_permalink(); ?>" class="thumbnail-preview">
+
+											<img src="<?php echo $image_url; ?>" alt="<?php the_title(); ?>">
+
+										</a>
+
+									</div>
+									<!-- iamge and sction area start -->
+									<div class="body-content">
+
+										<a href="<?php the_permalink(); ?>">
+											<h4 class="title"><?php the_title(); ?></h4>
+										</a>
+										<?php if ($weight): ?>
+											<span class="availability"><?php echo $weight; ?></span>
+										<?php endif; ?>
+										<?php if ($sale_price || $regular_price): ?>
+											<div class="price-area">
+												<span
+													class="current"><?php echo ($sale_price) ? $sale_price : $regular_price; ?></span>
+											</div>
+										<?php endif; ?>
+									</div>
+								</div>
+							</div>
+
+						<?php } ?>
+
+					</div>
+				</div>
+				<!-- first tabs area start-->
+			</div>
 
 			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+} elseif ($category_count > 0) {
+	// If no products are found but categories are, display the categories
+	?>
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tab-content" id="myTabContent">
+						<!-- first tabs area start-->
+						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="row g-4">
 
-			endwhile;
+								<?php
+								foreach ($categories as $category) {
+									$thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
 
-			the_posts_navigation();
+									// Get the URL of the image
+									$image_url = wp_get_attachment_url($thumbnail_id);
+									?>
 
-		else :
+									<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 d-flex">
+										<div class="single-shopping-card-one">
+											<!-- iamge and sction area start -->
+											 <?php if( $image_url ): ?>
+											<div class="image-and-action-area-wrapper">
+												<a href="<?php echo get_term_link($category); ?>" class="thumbnail-preview">
+													<img src="<?php echo $image_url; ?>" alt="<?php echo $category->name; ?>">
+												</a>
+											</div>
+											<?php endif; ?>
+											<!-- iamge and sction area start -->
+											<div class="body-content">
 
-			get_template_part( 'template-parts/content', 'none' );
+												<a href="<?php echo get_term_link($category); ?>">
+													<h4 class="title"><?php echo $category->name; ?></h4>
+												</a>
 
-		endif;
-		?>
+											</div>
+										</div>
+									</div>
+								<?php } ?>
+							</div>
+						</div>
+						<!-- first tabs area start-->
+					</div>
+				</div>
+			</div>
 
-	</main><!-- #main -->
+			<?php
+} else {
+	// Display a message if no products or categories are found
+	echo '<h4 class="title text-center mt-5 mb-5">No products or categories found matching your search.</h4>';
+}
 
-<?php
-get_sidebar();
-get_footer();
+// Reset post data after the product query
+wp_reset_postdata();
+?>
+
+
+		<?php
+		get_sidebar();
+		get_footer();

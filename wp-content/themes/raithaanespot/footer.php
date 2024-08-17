@@ -487,15 +487,16 @@ background-size: cover;">
 </div> -->
 <!--================= Preloader End Here =================-->
 
+<?php if( wp_is_mobile() ): ?>
 <div class="search-input-area">
-    <div class="container">
+    <form method="GET" action="<?php echo site_url('/'); ?>" class="container">
         <div class="search-input-inner">
             <div class="input-div">
-                <input id="searchInput1" class="search-input" type="text" placeholder="Search by keyword or #">
-                <button><i class="far fa-search"></i></button>
+                <input id="searchInput1" name="s" class="search-input" type="text" placeholder="Search by keyword or #">
+                <button type="submit"><i class="far fa-search"></i></button>
             </div>
         </div>
-    </div>
+    </form>
     <div id="close" class="search-close-icon"><i class="far fa-times"></i></div>
 </div>
 <div id="anywhere-home" class="anywere"></div>
@@ -505,6 +506,7 @@ background-size: cover;">
         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
     </svg>
 </div>
+<?php endif; ?>
 <!-- progress area end -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
