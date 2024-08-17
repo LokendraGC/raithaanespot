@@ -318,18 +318,40 @@
                                </div>
                            </div>
                            <!-- button-area -->
+                           <?php if( have_rows('wtn_social_media','options') ): ?>
                            <div class="right-location-area fourt">
                             <div class="follow-us-social">
                                 <div class="social">
-                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                   <?php 
+                                   $count = 1;
+                        while( have_rows( 'wtn_social_media','options' ) ):
+                            the_row();
 
+                            
+                            $media_icon = get_sub_field('wtn_media','options');
+                            $media_link = get_sub_field('wtn_link','options');
 
+                            if( $media_link ){
+                                $media = $media_link;
+                                $target_to = '_blank';
+                            }else{
+                                $media = '#';
+                                $target_to = '_self';
+                            }
+                         ?>
+                        <a href="<?php echo $media; ?>" target="<?php echo $target_to; ?>" ><i class="fa-brands <?php echo $media_icon; ?>"></i></a>
 
+                    <?php 
+                    if( $count == 3){
+                                break;
+                            }
+                    $count++;
+                endwhile; ?>
+                                    
                                 </div>
                             </div>
                         </div>
+                    <?php endif; ?>
                         <!-- button-area end -->
                     </div>
                     <div class="logo-search-category-wrapper">

@@ -16197,7 +16197,7 @@ li.with-megamenu:hover .rts-megamenu {
 }
 
 .banner-bg-full_1 {
-  background-image: url(../images/banner/03.webp);
+/*  background-image: url(../images/banner/03.webp);*/
   height: 600px;
   display: flex;
   align-items: flex-start;
@@ -16207,8 +16207,9 @@ li.with-megamenu:hover .rts-megamenu {
   background-position: center;
 }
 .banner-bg-full_1.img-two {
-  background-image: url(../images/banner/09.webp);
+/*  background-image: url(../images/banner/09.webp);*/
 }
+
 
 .banner-inner-content-three .pre {
   color: #EABC5E;
@@ -26007,10 +26008,10 @@ header.header-three .sub-dropdown .submenu.third-lvl.base {
   }
 }
 
-.feature_img{
+/*.feature_img{
   height: 200px;
-}
+}*/
 
-.front_feature_image{
+/*.front_feature_image{
   height: 276px;
-}
+}*/

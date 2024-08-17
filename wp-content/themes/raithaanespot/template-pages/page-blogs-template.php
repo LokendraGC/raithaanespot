@@ -3,11 +3,11 @@ get_header();
 /* Template Name: Blogs */
 ?>
 
-<style>
+<!-- <style>
     .feature_img{
         height: 200px;
     }
-</style>
+</style> -->
 
     <div class="rts-navigation-area-breadcrumb">
         <div class="container">

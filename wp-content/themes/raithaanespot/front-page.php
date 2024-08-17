@@ -1,6 +1,9 @@
 
-<?php get_header(); ?>
+<?php get_header();
+    
+    if( have_rows('r_slider_details') ):
 
+ ?>
 <div class="banner-three-swiper-main-wrapper">
     <div class="swiper mySwiper-category-1 swiper-data" data-swiper='{
         "spaceBetween":0,
@@ -43,19 +46,42 @@
                                         }
                                     }'>
                                     <div class="swiper-wrapper swiper-button-between">
+
                                         <!-- single swiper start -->
-                                        <div class="swiper-slide">
-                                            <!-- rts banner area start -->
-                                            <div class="rts-section-gap rts-banner-area-three banner-bg-full_1">
-                                                <div class="container-2">
+
+                                        <?php 
+                                        $count = 1;
+                                        while (have_rows('r_slider_details')) : the_row();
+
+                                            $discount_title = get_sub_field('discount_text');
+                                            $slider_title = get_sub_field('slider_title');
+                                            $slider_desc = get_sub_field('slider_description');
+                                            $slider_image = get_sub_field('slider_image');
+
+                                            // Determine the classes to be applied
+                                            $banner_class = 'banner-bg-full_1';
+                                            if ($count > 1) {
+                                                $banner_class .= ' img-two';
+                                            }
+
+                                            ?>
+                                            <div class="swiper-slide">
+                                                <!-- rts banner area start -->
+                                                <div class="rts-section-gap rts-banner-area-three <?php echo esc_attr($banner_class); ?>" 
+                                                   style="background-image: url(<?php echo esc_url($slider_image['url']); ?>);">
+                                                   <div class="container-2">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <div class="banner-inner-content-three"> <span class="pre"> Get up to 30% off on your first $150 purchase </span>
-                                                                <h1 class="title"> Don’t miss our amazing <br> grocery deals </h1>
-                                                                <p class="dsicription"> We have prepared special discounts for you on grocery products. Don't miss these opportunities... </p> <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                                    <div class="btn-text"> Shop Now </div>
-                                                                    <div class="arrow-icon"> <i class="fa-light fa-arrow-right"></i> </div>
-                                                                    <div class="arrow-icon"> <i class="fa-light fa-arrow-right"></i> </div>
+                                                            <div class="banner-inner-content-three"> 
+                                                                <span class="pre"><?php echo esc_html($discount_title); ?></span>
+                                                                <h1 class="title">
+                                                                    <?php echo $slider_title; ?></h1>
+                                                                <p class="dsicription">
+                                                                   <?php echo $slider_desc; ?></p> 
+                                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
+                                                                    <div class="btn-text">Shop Now</div>
+                                                                    <div class="arrow-icon"><i class="fa-light fa-arrow-right"></i></div>
+                                                                    <div class="arrow-icon"><i class="fa-light fa-arrow-right"></i></div>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -63,39 +89,30 @@
                                                 </div>
                                             </div> <!-- rts banner area end -->
                                         </div> <!-- single swiper start -->
-                                        <!-- single swiper start -->
-                                        <div class="swiper-slide">
-                                            <!-- rts banner area start -->
-                                            <div class="rts-section-gap rts-banner-area-three img-two banner-bg-full_1">
-                                                <div class="container-2">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="banner-inner-content-three"> <span class="pre"> Get up to 10% off on your first $250 purchase </span>
-                                                                <h1 class="title"> Check out our incredible <br> deals today </h1>
-                                                                <p class="dsicription"> We have prepared special discounts for you on grocery products. Don't miss these opportunities... </p> <a href="#" class="rts-btn btn-primary radious-sm with-icon">
-                                                                    <div class="btn-text"> Shop Now </div>
-                                                                    <div class="arrow-icon"> <i class="fa-light fa-arrow-right"></i> </div>
-                                                                    <div class="arrow-icon"> <i class="fa-light fa-arrow-right"></i> </div>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- rts banner area end -->
-                                        </div> <!-- single swiper start --> <button class="swiper-button-next"><i class="fa-regular fa-arrow-right"></i></button> <button class="swiper-button-prev"><i class="fa-regular fa-arrow-left"></i></button>
+                                        <?php 
+                                        $count++;
+                                    endwhile; 
+                                    ?>
+
+                                        <button class="swiper-button-next"><i class="fa-regular fa-arrow-right"></i>
+                                        </button> <button class="swiper-button-prev"><i class="fa-regular fa-arrow-left"></i></button>
                                     </div>
                                 </div>
                             </div> <!-- rts banenr area start -->
+                        <?php endif; ?>
+
                             <div class="rts-category-area rts-section-gap cover-card-main-over">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="">
-                                                <div class="row">
+                                            
+                                            <?php if( $best_selling_products = get_field('choose_best_selling_products') ): ?>
+                                            <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="title-area-between">
                                                             <h2 class="title-left mb--0">
-                                                             Best Selling Products
+                                                             Best Selling Product
                                                          </h2>
                                                          <div class="next-prev-swiper-wrapper">
                                                             <div class="swiper-button-prev"><i class="fa-regular fa-chevron-left"></i></div>
@@ -104,7 +121,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                <?php endif; ?>
                                             <div class="row">
+                                            
+                                            <?php if( $best_selling_products = get_field('choose_best_selling_products') ): ?>
                                                 <div class="col-lg-12">
                                                     <!-- rts category area satart -->
                                                     <div class="rts-caregory-area-one ">
@@ -144,116 +164,27 @@
                                                                                                         "spaceBetween":15}
                                                                                                     }
                                                                                                 }'>
-                                                                                                <div class="swiper-wrapper">
-                                                                                                    <!-- single swiper start -->
+                                                    <div class="swiper-wrapper">
+                                                       <!-- single swiper start -->
+                                                                     <?php 
+                                                                     foreach( $best_selling_products as $product ):
+                                                                            $image_url = wp_get_attachment_url(get_post_thumbnail_id($product->ID));
+                                                                        ?>
                                                                                                     <div class="swiper-slide">
                                                                                                         <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/rice.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
+                                                                     <a href="<?php echo get_the_permalink($product->ID); ?>">
+                                                                                                                <img src="<?php echo $image_url; ?>"
+                                                                                                                 alt="<?php echo $product->post_title;?>">
+                                                                                                <p>
+                                                                                                <?php echo $product->post_title; ?></p>
                                                                                                                 
                                                                                                             </a>
                                                                                                         </div>
                                                                                                     </div>
+                                                                                                    <?php endforeach; ?>
                                                                                                     <!-- single swiper start -->
                                                                                                     <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ghee.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fruits.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/herbs.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fruits.jpg" alt="category">
-                                                                                                                <p>Organic Foods</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ghee.jpg" alt="category">
-                                                                                                                <p>Primiun Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/rice.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ghee.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/herbs.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <!-- single swiper start -->
-                                                                                                    <div class="swiper-slide">
-                                                                                                        <div class="single-category-one ">
-                                                                                                            <a href="product-list.html">
-                                                                                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fruits.jpg" alt="category">
-                                                                                                                <p>Organic Vegetable</p>
-                                                                                                                
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
+                                                                                                   
                                                                                                     <!-- single swiper start -->
                                                                                                 </div>
                                                                                             </div>
@@ -270,6 +201,7 @@
 
                                                     </div>
                                                 </div>
+                                                <?php endif; ?>
                                                 <!-- rts banenr area start -->
                                                 <div class="rts-banner-area bg_light-1  d-flex align-items-center">
                                                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/filed-work.svg" alt="">
@@ -336,6 +268,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-3">
                                                 <div class="single-feature-card bg_image three" style="background-image:url(<?php echo get_template_directory_uri(); ?>/assets/images/ghee.jpg);">
                                                     <div class="overlap"></div>

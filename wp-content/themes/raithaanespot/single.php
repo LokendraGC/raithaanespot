@@ -13,7 +13,7 @@ get_header();
 <?php $offer_image = get_field('offer_image'); ?>
 <style>
 	.related_img{
-		height: 78px;
+		height: 34px;
 	}
 	.blog-sidebar-single-wized.with-add{
 	    background-image: url(<?php echo $offer_image ? $offer_image['url'] : get_template_directory_uri() .  '/assets/images/blog/thumb/12.jpg' ; ?>);
@@ -28,7 +28,7 @@ get_header();
 				<div class="navigator-breadcrumb-wrapper">
 					<a href="<?php echo site_url('/'); ?>">Home</a>
 					<i class="fa-regular fa-chevron-right"></i>
-					<a class="current" href="<?php echo site_url('blog'); ?>">Blog</a>
+					<a class="current" href="<?php echo site_url('blog'); ?>">Blogs</a>
 					<i class="fa-regular fa-chevron-right"></i>
 					<a class="current" href="#"><?php the_title(); ?></a>
 				</div>
