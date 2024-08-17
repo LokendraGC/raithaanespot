@@ -322,31 +322,32 @@
                            <div class="right-location-area fourt">
                             <div class="follow-us-social">
                                 <div class="social">
-                                   <?php 
-                                   $count = 1;
-                        while( have_rows( 'wtn_social_media','options' ) ):
-                            the_row();
+                                  <?php 
+                                  $social_count = 1;
 
-                            
-                            $media_icon = get_sub_field('wtn_media','options');
-                            $media_link = get_sub_field('wtn_link','options');
+                                  if( have_rows('wtn_social_media', 'options') ):
+                                    while( have_rows('wtn_social_media', 'options') ):
+                                        the_row();
 
-                            if( $media_link ){
-                                $media = $media_link;
-                                $target_to = '_blank';
-                            }else{
-                                $media = '#';
-                                $target_to = '_self';
-                            }
-                         ?>
-                        <a href="<?php echo $media; ?>" target="<?php echo $target_to; ?>" ><i class="fa-brands <?php echo $media_icon; ?>"></i></a>
+                                        $media_ico = get_sub_field('wtn_media', 'options');
+                                        $media_linkk = get_sub_field('wtn_link', 'options');
 
-                    <?php 
-                    if( $count == 3){
-                                break;
-                            }
-                    $count++;
-                endwhile; ?>
+                                        if( $media_linkk ) {
+                                            $media = $media_linkk;
+                                            $target_to = '_blank';
+                                        } else {
+                                            $media = '#';
+                                            $target_to = '_self';
+                                        }
+                                        ?>
+                                        <a href="<?php echo esc_url($media); ?>" target="<?php echo esc_attr($target_to); ?>">
+                                            <i class="fa-brands <?php echo esc_attr($media_ico); ?>"></i>
+                                        </a>
+                                        <?php 
+                                    endwhile;
+                                    wp_reset_query();
+                                endif;
+                                ?>
                                     
                                 </div>
                             </div>

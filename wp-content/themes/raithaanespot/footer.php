@@ -138,7 +138,10 @@ background-size: cover;">
                          ?>
                         <li><a href="<?php echo $media; ?>" target="<?php echo $target_to; ?>" ><i class="fa-brands <?php echo $media_icon; ?>"></i></a></li>
 
-                    <?php endwhile; ?>
+                    <?php 
+                    wp_reset_query();
+                endwhile; 
+                ?>
                       
                     </ul>
                 </div>
