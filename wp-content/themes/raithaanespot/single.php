@@ -10,7 +10,7 @@
 get_header();
 ?>
 
-<?php $offer_image = get_field('offer_image'); ?>
+<?php $offer_image = get_field('offer_image','options'); ?>
 <style>
 	.related_img{
 		height: 34px;
@@ -141,7 +141,7 @@ get_header();
 
 				<div class="blog-sidebar-single-wized with-add bg_image">
 					<div class="add-are-content">
-						<?php if( $offer_details = get_field('offer_detail') ): ?>
+						<?php if( $offer_details = get_field('offer_detail','options') ): ?>
 							<?php echo $offer_details; ?>
 						<?php endif; ?>
 						<a href="#" class="shop-now-goshop-btn">

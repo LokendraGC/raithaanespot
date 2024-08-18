@@ -148,7 +148,7 @@ background-size: cover;">
             <?php endif; ?>
                 <div class="copyright text-center">
                     <p class="disc">
-                        Copyright <?php echo Date('Y'); ?> <a href="<?php echo site_url('/'); ?>">©Raithaane Point</a>. All rights reserved.
+                        Copyright <?php echo Date('Y'); ?> <a href="<?php echo site_url('/'); ?>">©<?php echo bloginfo('sitename'); ?></a>. All rights reserved.
                     </p>
                 </div>
                 <?php if( $gallery_images = get_field('payment_images','options') ): ?>
