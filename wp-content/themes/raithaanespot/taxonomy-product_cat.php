@@ -99,7 +99,13 @@ if( $products_data ):
                                <?php 
                                foreach( $products_data as $post ):
                         		setup_postdata($post);
-                        		
+
+                              $weight = get_field('product_weight', $post->ID);
+
+                              $product_id = get_the_ID();
+                              $product = wc_get_product($post->ID);
+                              $sale_price = $product->get_sale_price();
+                              $regular_price = $product->get_regular_price();
                         		?>
                                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 d-flex">
                                     <div class="single-shopping-card-one deals-of-day">
@@ -110,17 +116,42 @@ if( $products_data ):
                                     <?php endif; ?>
 
                                         <div class="body-content">
-                                             <a href="product-detail.html">
+                                             <a href="<?php echo get_the_permalink( $post->ID ); ?>">
                                                 <h4 class="title"><?php echo $post->post_title; ?></h4>
-                                            </a> <span class="availability">500g Pack</span>
-                                            <div class="price-area"> <span class="current">Rs 2000</span>
-                                                <div class="previous">Rs 2000</div>
+                                            </a> 
+                                            <?php if( $weight ): ?>
+                                            <span class="availability"><?php echo $weight; ?></span>
+                                        <?php endif; ?>
+                                            <div class="price-area">
+
+                                        <?php if( $sale_price ): ?>
+                                             <span class="current"><?php echo $sale_price; ?></span>
+                                         <?php endif; ?>
+                                         <?php if( $regular_price ): ?>
+                                                <div class="previous"><?php echo $regular_price; ?></div>
+                                            <?php endif; ?>
                                             </div>
-                                            <div class="cart-counter-action"> <a href="shop-grid-top-filter.html" class="rts-btn btn-primary radious-sm with-icon">
-                                                    <div class="btn-text"> Add To Cart </div>
-                                                    <div class="arrow-icon"> <i class="fa-regular fa-cart-shopping"></i> </div>
-                                                    <div class="arrow-icon"> <i class="fa-regular fa-cart-shopping"></i> </div>
-                                                </a> </div>
+                                                    
+
+                                            <form action="<?php echo site_url('product-category'.'/'.$term->slug); ?>" class="variations_form cart wvs-loaded cart-counter-action" method="post">
+
+                                               <button type="submit" class="submit rts-btn btn-primary radious-sm with-icon">                                               
+                                                    <div class="btn-text added_to_cart">
+                                                        Add To Cart
+                                                    </div>
+                                                    <div class="arrow-icon">
+                                                        <i class="fa-regular fa-cart-shopping"></i>
+                                                    </div>
+                                                    <div class="arrow-icon">
+                                                        <i class="fa-regular fa-cart-shopping"></i>
+                                                    </div>
+                                                
+                                                </button>
+
+                                            <input type="hidden" name="add-to-cart" value="<?php echo $product_id; ?>">
+                                            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                                        </form>
+
                                         </div>
                                     </div>
                                 </div>
