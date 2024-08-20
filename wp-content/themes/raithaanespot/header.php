@@ -107,7 +107,25 @@
 
     <?php wp_head(); ?>
 
-
+    <?php if(  WC()->cart->get_cart_contents_count() != 0 ){ ?>
+        <style>
+        .accont-wishlist-cart-area-header .cart i::after {
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            height: 16px;
+            width: 16px;
+            content: "<?php echo WC()->cart->get_cart_contents_count(); ?>";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            color: #fff;
+            }
+        </style>
+        <?php } ?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -151,96 +169,8 @@
                                 <div class="btn-border-only cart category-hover-header">
                                     <i class="fa-sharp fa-regular fa-cart-shopping"></i>
                                     <span>My Cart</span>
-                                    <div class="category-sub-menu card-number-show">
-                                        <h5 class="shopping-cart-number">Shopping Cart (03)</h5>
-                                        <div class="cart-item-1 border-top">
-                                            <div class="img-name">
-                                                <div class="thumbanil">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/cart-1.png"
-                                                        alt="">
-                                                </div>
-                                                <div class="details">
-                                                    <a href="product-detail.html">
-                                                        <h5 class="title">Foster Farms Breast Nuggets Shaped Chicken
-                                                        </h5>
-                                                    </a>
-                                                    <div class="number">
-                                                        1 <i class="fa-regular fa-x"></i>
-                                                        <span>Rs 2000</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="close-c1">
-                                                <i class="fa-regular fa-x"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cart-item-1">
-                                            <div class="img-name">
-                                                <div class="thumbanil">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/05.png"
-                                                        alt="">
-                                                </div>
-                                                <div class="details">
-                                                    <a href="product-detail.html">
-                                                        <h5 class="title">Foster Farms Breast Nuggets Shaped Chicken
-                                                        </h5>
-                                                    </a>
-                                                    <div class="number">
-                                                        1 <i class="fa-regular fa-x"></i>
-                                                        <span>Rs 2000</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="close-c1">
-                                                <i class="fa-regular fa-x"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cart-item-1">
-                                            <div class="img-name">
-                                                <div class="thumbanil">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/04.png"
-                                                        alt="">
-                                                </div>
-                                                <div class="details">
-                                                    <a href="product-detail.html">
-                                                        <h5 class="title">Foster Farms Breast Nuggets Shaped Chicken
-                                                        </h5>
-                                                    </a>
-                                                    <div class="number">
-                                                        1 <i class="fa-regular fa-x"></i>
-                                                        <span>Rs 2000</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="close-c1">
-                                                <i class="fa-regular fa-x"></i>
-                                            </div>
-                                        </div>
-                                        <div class="sub-total-cart-balance">
-                                            <div class="bottom-content-deals mt--10">
-                                                <div class="top">
-                                                    <span>Sub Total:</span>
-                                                    <span class="number-c">$108.00</span>
-                                                </div>
-                                                <div class="single-progress-area-incard">
-                                                    <div class="progress">
-                                                        <div class="progress-bar wow fadeInLeft" role="progressbar"
-                                                            style="width: 80%" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                                <p>Spend More <span>$125.00</span> to reach <span>Free Shipping</span>
-                                                </p>
-                                            </div>
-                                            <div
-                                                class="button-wrapper d-flex align-items-center justify-content-between">
-                                                <a href="cart.html" class="rts-btn btn-primary ">View Cart</a>
-                                                <a href="checkout.html"
-                                                    class="rts-btn btn-primary border-only">CheckOut</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="cart.html" class="over_link"></a>
+                                    <?php woocommerce_mini_cart();  ?>
+                                    <a href="<?php echo wc_get_cart_url(); ?>" class="over_link"></a>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +185,6 @@
                         <div class="nav-and-btn-wrapper">
                             <div class="nav-area-bottom-left-header-four">
                                 <?php
-
                                 $product_categories = get_terms(array(
                                     'taxonomy' => 'product_cat',
                                     'hide_empty' => true,
@@ -280,7 +209,6 @@
                                         </ul>
                                     </div>
                                 <?php endif; ?>
-
                                 <div class="nav-area">
                                     <?php
                                     $menu_args = array(
@@ -510,87 +438,10 @@
                                     <div class="btn-border-only cart category-hover-header">
                                         <i class="fa-sharp fa-regular fa-cart-shopping"></i>
                                         <span>My Cart</span>
-                                        <div class="category-sub-menu card-number-show">
-                                            <h5 class="shopping-cart-number">Shopping Cart (03)</h5>
-                                            <div class="cart-item-1 border-top">
-                                                <div class="img-name">
-                                                    <div class="thumbanil">
-                                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/cart-1.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="details">
-                                                        <a href="product-detail.html">
-                                                            <h5 class="title">Foster Farms Breast Nuggets Shaped Chicken
-                                                            </h5>
-                                                        </a>
-                                                        <div class="number">
-                                                            1 <i class="fa-regular fa-x"></i>
-                                                            <span>Rs 2000</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="close-c1">
-                                                    <i class="fa-regular fa-x"></i>
-                                                </div>
-                                            </div>
-                                            <div class="cart-item-1">
-                                                <div class="img-name">
-                                                    <div class="thumbanil">
-                                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/05.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="details">
-                                                        <a href="product-detail.html">
-                                                            <h5 class="title">Foster Farms Breast Nuggets Shaped Chicken
-                                                            </h5>
-                                                        </a>
-                                                        <div class="number">
-                                                            1 <i class="fa-regular fa-x"></i>
-                                                            <span>Rs 2000</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="close-c1">
-                                                    <i class="fa-regular fa-x"></i>
-                                                </div>
-                                            </div>
-                                            <div class="cart-item-1">
-                                                <div class="img-name">
-                                                    <div class="thumbanil">
-                                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/04.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="details">
-                                                        <a href="product-detail.html">
-                                                            <h5 class="title">Foster Farms Breast Nuggets Shaped Chicken
-                                                            </h5>
-                                                        </a>
-                                                        <div class="number">
-                                                            1 <i class="fa-regular fa-x"></i>
-                                                            <span>Rs 2000</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="close-c1">
-                                                    <i class="fa-regular fa-x"></i>
-                                                </div>
-                                            </div>
-                                            <div class="sub-total-cart-balance">
-                                                <div class="bottom-content-deals mt--10">
-                                                    <div class="top">
-                                                        <span>Sub Total:</span>
-                                                        <span class="number-c">$108.00</span>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="button-wrapper d-flex align-items-center justify-content-between">
-                                                    <a href="cart.html" class="rts-btn btn-primary ">View Cart</a>
-                                                    <a href="checkout.html"
-                                                        class="rts-btn btn-primary border-only">CheckOut</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="cart.html" class="over_link"></a>
+
+                                        <?php woocommerce_mini_cart();  ?>
+
+                                        <a href="<?php echo wc_get_cart_url(); ?>" class="over_link"></a>
                                     </div>
                                 </div>
                                 <div class="actions-area">

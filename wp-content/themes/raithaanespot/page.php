@@ -34,7 +34,7 @@ get_header();
 </div>  
 <div class="rts-cart-area rts-section-gap bg_light-1">
 	<div class="container">
-			<?php the_content(); ?>
+		<?php the_content(); ?>
 	</div>
 </div>
 <?php
