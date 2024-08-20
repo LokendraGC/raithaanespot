@@ -200,8 +200,8 @@ $sku_id = $product->get_sku();
 											<span class="catagorys product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">Categories: </span> <?php echo $term_name; ?></span>
 											<?php 
 											}
-											if ( $wtn_weight = get_field( 'wtn_weight' ) ) : ?>
-												<span class="tags product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">Weight: </span> <?php echo esc_html( $wtn_weight ); ?></span>
+											if ( $product_weight = get_field( 'product_weight' ) ) : ?>
+												<span class="tags product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">Weight: </span> <?php echo esc_html( $product_weight ); ?></span>
 											<?php endif; ?>
 										</div>
 										
@@ -222,7 +222,7 @@ $sku_id = $product->get_sku();
 							<?php
 								$active = '';
 								} 
-								$wtn_faqs = get_field( 'wtn_faqs' );
+								$wtn_faqs = get_field( 'faq_details' );
 								if($wtn_faqs){
 							?>
 								<li class="nav-item" role="presentation">
@@ -252,8 +252,8 @@ $sku_id = $product->get_sku();
 											<?php 
 											$re_count = 1;
 											foreach( $wtn_faqs as $wtn_faq ){
-												$que = $wtn_faq['wtn_question'];
-												$ans = $wtn_faq['wtn_answer'];
+												$que = $wtn_faq['faq_question'];
+												$ans = $wtn_faq['faq_answer'];
 												if( $que && $ans ){
 											?>
 												<div class="accordion-item">
@@ -284,39 +284,41 @@ $sku_id = $product->get_sku();
 				
 				<div class="col-xl-3 col-lg-4 col-md-12 offset-xl-1  rts-sticky-column-item">
 					<div class="theiaStickySidebar">
+						<?php if( have_rows('offer_details','options') ): ?>
+						
 						<div class="shop-sight-sticky-sidevbar  mb--20">
 							<h6 class="title">Available offers</h6>
+							<?php
+							 while( have_rows('offer_details','options') ):the_row();
+							 	
+							 	$offer_icon = get_sub_field('offer_icon','options');
+							 	$offer_detail = get_sub_field('offer_description','options');
+							 ?>	
 							<div class="single-offer-area">
+								<?php if( $offer_icon ): ?>
 								<div class="icon">
-									<img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/01.svg" alt="icon">
+									<img src="<?php echo $offer_icon['url']; ?>" alt="offer icon">
 								</div>
+							<?php endif; ?>
+							 <?php if( $offer_detail ): ?>
 								<div class="details">
-									<p>Get %5 instant discount for the 1st Flipkart Order using Ekomart UPI T&C</p>
+									<p><?php echo $offer_detail; ?></p>
 								</div>
+							<?php endif; ?>
 							</div>
-							<div class="single-offer-area">
-								<div class="icon">
-									<img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/02.svg" alt="icon">
-								</div>
-								<div class="details">
-									<p>Flat $250 off on Citi-branded Credit Card EMI Transactions on orders of $30 and above T&C</p>
-								</div>
-							</div>
-							<div class="single-offer-area">
-								<div class="icon">
-									<img src="<?php echo get_template_directory_uri(); ?>/assets/images/shop/03.svg" alt="icon">
-								</div>
-								<div class="details">
-									<p>Free Worldwide Shipping on all
-										orders over $100</p>
-								</div>
-							</div>
+						<?php endwhile; ?>
+
 						</div>
+					<?php endif; ?>
+					<?php if( $payment_images = get_field('payment_images','options') ): ?>
 						<div class="our-payment-method">
 							<h5 class="title">Guaranteed Safe Checkout</h5>
-							<img src="<?php echo get_template_directory_uri(); ?>/assets/images/khalti-logo.png" alt="">
-							<img src="<?php echo get_template_directory_uri(); ?>/assets/images/esewa-logo.png" alt="">
+							<?php foreach( $payment_images as $image ): ?>
+							<img src="<?php echo $image['sizes']['large']; ?>" alt="Payment image">
+						<?php endforeach; ?>
+
 						</div>
+					<?php endif; ?>
 					</div>
 				</div>
 
@@ -418,7 +420,7 @@ $sku_id = $product->get_sku();
 											<h4 class="title"><?php the_title(); ?></h4>
 										</a>
 										<?php 
-										$weight = get_field('wtn_weight');
+										$weight = get_field('product_weight');
 										if($weight){
 										?>
 											<span class="availability"><?php echo $weight; ?> Pack</span>
